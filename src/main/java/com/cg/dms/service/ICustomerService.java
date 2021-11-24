@@ -22,7 +22,7 @@ import com.cg.dms.repository.ICustomerRepository;
 		private ICustomerRepository icustomerRepository;
 
 //		public List<Customer>viewCustomers() throws CustomerNotFoundException;
-		public List<Customer> viewAllCustomers() {
+		public List<Customer> getAllCustomers() {
 			LOG.info("Get All Customer Services");
 			return icustomerRepository.findAll();
 		}
@@ -39,13 +39,17 @@ import com.cg.dms.repository.ICustomerRepository;
 
 		// public Customer updateCustomer(Customer customer) throws
 		// CustomerNotFoundException;
-		public Customer updateCustomer(Customer customer) {
-			LOG.info("Update customer Service");
-			if (icustomerRepository.existsById(customer.getCustomerId()))
+		public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
+			LOG.info("Update Customer");
+			if (icustomerRepository.existsById(customer.getCustomerId())) {
+				LOG.info("Already data is available");
 				return icustomerRepository.save(customer);
-			System.out.println(customer.getCustomerId() + "does not found from Database source");
-			return null;
-		}
+			} else {
+				LOG.info("Customer data is not updated");
+				throw new CustomerNotFoundException(customer + "this customer is not Updated");
+			}
+	 }
+		
 
 		// public Customer deleteCustomer(Customer customer) throws
 		// CustomerNotFoundException;
@@ -76,6 +80,23 @@ import com.cg.dms.repository.ICustomerRepository;
 			}
 
 		}
+//		public List<Customer> getAllCustomer() {
+//			LOG.info("Service getAllCustomer");
+//			return icustomerRepository.findAll();
+//		}
+		
+		public  Customer getCustomerById(int customerId) throws CustomerNotFoundException {
+			LOG.info("getcustomerId");
+			Optional<Customer> CustomerOpt = icustomerRepository.findById(customerId);
+			if (CustomerOpt.isPresent()) {
+				LOG.info("Customer is available.");
+				return CustomerOpt.get();
+			} else {
+				LOG.info("Customer is NOT available.");
+				throw new CustomerNotFoundException(customerId + " this Customer is not found.");
+			}
+		}
+
 
 //		public Customer validateCustomer(String username, String password) throws CustomerNotFoundException;
 		/*

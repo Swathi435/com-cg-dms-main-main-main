@@ -46,7 +46,7 @@ public class CompanyRestController {
 		return response;
 	}
 
-	@GetMapping("/getcompanybyid/{companyId}")
+	@GetMapping("/getcompanybyId/{companyId}")
 	public ResponseEntity<Company> getcompanyById(@PathVariable(name = "companyId") int companyId)throws CompanyNotFoundException {
 			 
 		LOG.info("getcompanyById");

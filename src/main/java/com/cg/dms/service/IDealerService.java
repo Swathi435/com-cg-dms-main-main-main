@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.dms.entities.Company;
+import com.cg.dms.entities.Customer;
 import com.cg.dms.entities.Dealer;
 import com.cg.dms.exception.CompanyNotFoundException;
+import com.cg.dms.exception.CustomerNotFoundException;
 import com.cg.dms.exception.DealerAlreadyExistsException;
 import com.cg.dms.exception.DealerNotFoundException;
 import com.cg.dms.repository.ICompanyRepository;
+import com.cg.dms.repository.ICustomerRepository;
 import com.cg.dms.repository.IDelearRepository;
 
 @Service
@@ -25,6 +28,8 @@ public class IDealerService {
 	private IDelearRepository iDealerRepository;
 	@Autowired
 	private ICompanyRepository iCompanyRepository;
+	@Autowired
+	private ICustomerRepository iCustomerRepository;
 
 
 	public Dealer insertDealer(Dealer dealer) throws DealerAlreadyExistsException {
@@ -55,7 +60,7 @@ public class IDealerService {
 		public Dealer updateDealer(Dealer dealer) throws DealerNotFoundException {
 			LOG.info("Service updateDealer");
 			if (iDealerRepository.existsById(dealer.getDealerId())) {
-				LOG.info("Farmer Data is Updated");
+				LOG.info("dealear Data is Updated");
 				return iDealerRepository.save(dealer);
 			}else {
 			LOG.info(dealer.getDealerId() + " dealer data is Not updated");
@@ -80,17 +85,32 @@ public class IDealerService {
 			LOG.info("Service getAllCompany");
 			return iCompanyRepository.findAll();
 	}
-	 public Company getCompanyById(int id) throws CompanyNotFoundException {
+	 public Company getCompanyById(int companyId) throws CompanyNotFoundException {
 			LOG.info("getCompanyById");
-			Optional<Company> com = iCompanyRepository.findById(id);
+			Optional<Company> com = iCompanyRepository.findById(companyId);
 			if (com.isPresent()) {
 				LOG.info("Company is available.");
 				return com.get();
 			} else {
 				LOG.info("Company is NOT available.");
-				throw new CompanyNotFoundException(id+ " this company is not found.");
+				throw new CompanyNotFoundException(companyId+ " this company is not found.");
 			}
 		}
+	 public List<Customer> getAllCustomer() {
+			LOG.info("Service getAllCustomer");
+			return iCustomerRepository.findAll();
+		}
+	 public Customer getcustomerById(int customerId) throws CustomerNotFoundException {
+			LOG.info("getCustomerById");
+			Optional<Customer> custmer = iCustomerRepository.findById(customerId);
+			if (custmer.isPresent()) {
+				LOG.info("Customer is available.");
+				return custmer.get();
+			} else {
+				LOG.info("Customer is NOT available.");
+				throw new CustomerNotFoundException(customerId+ " this Customer is not found.");
+			}
+	 }
 }
 
 //	public Dealer updateDealer(Dealer dealer) throws DealerNotFoundException;

@@ -29,10 +29,10 @@ public class CustomerController {
 	private ICustomerService customerservice;
 	
 	//https://localhost:8082/vwalcusts
-	@GetMapping("/viewallcustomers")
-	public List<Customer> viewCustomers(){
-		LOG.info("VIEW_ALL_CUSTOMERS_CONTROLLER");
-		List<Customer> list = customerservice.viewAllCustomers();
+	@GetMapping("/getallcustomers")
+	public List<Customer> getCustomers(){
+		LOG.info("GET_ALL_CUSTOMERS_CONTROLLER");
+		List<Customer> list = customerservice.getAllCustomers();
 		return list;
 	}
 	
@@ -49,7 +49,8 @@ public class CustomerController {
 	
 	//https://localhost:8082/updtcustom
 	@PutMapping("/updatetcustomer")
-	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws CustomerNotFoundException {
+		LOG.info("INSERT_CUSTOMER_CONTROLLER");
 		LOG.info("UPDATE_CUSTOMER_CONTROLLER");
 		Customer custom = customerservice.updateCustomer(customer);
 		HttpHeaders headers = new HttpHeaders();

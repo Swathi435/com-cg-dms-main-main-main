@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.dms.entities.Company;
+import com.cg.dms.entities.Customer;
 import com.cg.dms.entities.Dealer;
 import com.cg.dms.exception.CompanyNotFoundException;
+import com.cg.dms.exception.CustomerNotFoundException;
 import com.cg.dms.exception.DealerAlreadyExistsException;
 import com.cg.dms.exception.DealerNotFoundException;
 import com.cg.dms.service.ICompanyService;
@@ -38,8 +40,10 @@ public class DealerRestController {
 	
 	 @Autowired
 	    private IDealerService iDealerService;
-	 
+	 @Autowired
 	    private ICompanyService iCompanyService;
+	 @Autowired
+	    private ICustomerService iCustomerService;
 	 
 //	 @GetMapping("/Dealer")
 //	    public List<Customer> getAllCustomer() {
@@ -105,20 +109,33 @@ public class DealerRestController {
 	 @GetMapping("/getallcompany")
 		public List<Company> getAllCompany() {
 			LOG.info("getAllCompany"); 
-			LOG.info("getAllCompany");  
-			LOG.info("getAllCompany");  
- 
 			return iCompanyService.getAllCompany();
 		}
 	 @GetMapping("/getCompanybyId/{id}")
-		public ResponseEntity<Company> getCompanyById(@PathVariable(name = "CompanyId") int id) throws CompanyNotFoundException {
+		public ResponseEntity<Company> getCompanyById(@PathVariable(name = "CompanyId") int companyId) throws CompanyNotFoundException {
 			LOG.info("getCompanyById");
-			Company comp = iCompanyService.getCompanyById(id);
+			Company comp = iCompanyService.getCompanyById(companyId);
 			LOG.info(comp.toString());
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("message", "This Company is available in the database.");
 			LOG.info(headers.toString());
 			ResponseEntity<Company> response = new ResponseEntity<Company>(comp, headers, HttpStatus.OK);
+			return response;
+	 }
+	 @GetMapping("/getallcustomer")
+		public List<Customer> getAllCustomer() {
+			LOG.info("getAllCustomer"); 
+			return iCustomerService.getAllCustomers();
+		}
+	 @GetMapping("/getcustomerId/{id}")
+		public ResponseEntity<Customer> getcustomerById(@PathVariable(name = "customerId") int customerId) throws CustomerNotFoundException {
+			LOG.info("getcustomerById");
+			Customer customer = iCustomerService.getCustomerById(customerId);
+			LOG.info(customer.toString());
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("message", "This Customer is available in the database.");
+			LOG.info(headers.toString());
+			ResponseEntity<Customer> response = new ResponseEntity<Customer>(customer, headers, HttpStatus.OK);
 			return response;
 	 }
 }
