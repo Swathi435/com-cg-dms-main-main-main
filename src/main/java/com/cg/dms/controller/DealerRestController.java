@@ -59,6 +59,7 @@ public class DealerRestController {
 //	        iDealerService.insertDealer(user);
 //	        return user;
 //	    }
+	//https://localhost:8082/adddealer
 	 @PostMapping("/adddealer")
 		public ResponseEntity<Dealer> adddealer(@RequestBody Dealer dealer) throws DealerAlreadyExistsException{
 			LOG.info("Controller addDealer");
@@ -69,6 +70,7 @@ public class DealerRestController {
 			ResponseEntity<Dealer> response = new ResponseEntity<Dealer>(deal, headers, HttpStatus.OK);
 			return response;
 		}
+	//https://localhost:8082/getdealbyid/{dealerId}
 	 @GetMapping("/getdealbyid/{dealerId}")
 		public ResponseEntity<Dealer> getDealById(@PathVariable(name = "dealerId") int dealerId) throws DealerNotFoundException {
 			LOG.info("getdealById");
@@ -80,6 +82,7 @@ public class DealerRestController {
 			ResponseEntity<Dealer> response = new ResponseEntity<Dealer>(deal, headers, HttpStatus.OK);
 			return response;
 		}
+	//https://localhost:8082/updatedealer
 	 @PutMapping("/updatedealer")
 		public ResponseEntity<Dealer> updateEmp(@RequestBody Dealer dealer) throws DealerNotFoundException {
 			LOG.info("Controller updatedealer");
@@ -89,6 +92,7 @@ public class DealerRestController {
 			ResponseEntity<Dealer> response = new ResponseEntity<Dealer>(deal, headers, HttpStatus.OK);
 			return response;
 		}
+	//https://localhost:8082/deletedealbyid/{dealerid}
 	 @DeleteMapping("/deletedealbyid/{dealerid}")
 		public ResponseEntity<Dealer> deletedealById(@PathVariable(name = "dealerid") int dealerid) throws DealerNotFoundException {
 			LOG.info("deletedealerbyid");
@@ -106,11 +110,13 @@ public class DealerRestController {
 //			LOG.info("getAllCustomer");  
 //			 return ICustomerService.getAllCustomer();
 //		}
+	 //https://localhost:8082/getallcompany
 	 @GetMapping("/getallcompany")
 		public List<Company> getAllCompany() {
 			LOG.info("getAllCompany"); 
 			return iCompanyService.getAllCompany();
 		}
+	//https://localhost:8082/getCompanybyId/{id}
 	 @GetMapping("/getCompanybyId/{id}")
 		public ResponseEntity<Company> getCompanyById(@PathVariable(name = "CompanyId") int companyId) throws CompanyNotFoundException {
 			LOG.info("getCompanyById");
@@ -122,11 +128,13 @@ public class DealerRestController {
 			ResponseEntity<Company> response = new ResponseEntity<Company>(comp, headers, HttpStatus.OK);
 			return response;
 	 }
+	//https://localhost:8082/getallcustomer
 	 @GetMapping("/getallcustomer")
 		public List<Customer> getAllCustomer() {
 			LOG.info("getAllCustomer"); 
 			return iCustomerService.getAllCustomers();
 		}
+	//https://localhost:8082/getcustomerId/{id}
 	 @GetMapping("/getcustomerId/{id}")
 		public ResponseEntity<Customer> getcustomerById(@PathVariable(name = "customerId") int customerId) throws CustomerNotFoundException {
 			LOG.info("getcustomerById");

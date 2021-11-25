@@ -29,6 +29,7 @@ public class FarmerRestController {
 	
     @Autowired
     private IFarmerService iFarmerService;
+  //https://localhost:8082/addfarmer
     @PostMapping("/adddfarmer")
 	public ResponseEntity<Farmer> addfarmer(@RequestBody Farmer farmer) throws FarmerAlreadyExistsException  {
 		LOG.info("Controller addfarmer");
@@ -39,6 +40,7 @@ public class FarmerRestController {
 		ResponseEntity<Farmer> response = new ResponseEntity<Farmer>(farmer, headers, HttpStatus.OK);
 		return response;
 	}
+  //https://localhost:8082/updatefarmer
     @PutMapping("/updatefarmer")
 	public ResponseEntity<Farmer> updatefarmer(@RequestBody Farmer farmer) throws FarmerNotFoundException {
 		LOG.info("Controller updatefarmer");
@@ -48,6 +50,7 @@ public class FarmerRestController {
 		ResponseEntity<Farmer> response = new ResponseEntity<Farmer>(farmer, headers, HttpStatus.OK);
 		return response;
 	}
+  //https://localhost:8082/getallfarmer
     @GetMapping("/getallfarmer")
 	public List<Farmer> getAllFarmer() {
 		LOG.info("getAllFarmer"); 
@@ -56,6 +59,7 @@ public class FarmerRestController {
 
 		return iFarmerService.getAllFarmer();
 	}
+  //https://localhost:8082/getfarmer/{dealerId}
     @GetMapping("/getFarmer/{dealerId}")
 	public ResponseEntity<Farmer> getFarmer(@PathVariable(name = "Farmer") int dealerId) throws DealerNotFoundException {
 		LOG.info("getFarmer");

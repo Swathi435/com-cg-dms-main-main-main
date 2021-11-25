@@ -28,7 +28,7 @@ public class CustomerController {
 	@Autowired
 	private ICustomerService customerservice;
 	
-	//https://localhost:8082/vwalcusts
+	//https://localhost:8082/getallcustomer
 	@GetMapping("/getallcustomers")
 	public List<Customer> getCustomers(){
 		LOG.info("GET_ALL_CUSTOMERS_CONTROLLER");
@@ -36,7 +36,7 @@ public class CustomerController {
 		return list;
 	}
 	
-	//https://localhost:8082/insrtcustom
+	//https://localhost:8082/insertcustomer
 	@PostMapping("/insertcustomer")
 	public ResponseEntity<Customer> insertCustomer(@RequestBody Customer customer) throws CustomerNotFoundException {
 		LOG.info("INSERT_CUSTOMER_CONTROLLER");
@@ -47,8 +47,8 @@ public class CustomerController {
 		return response;
 	}
 	
-	//https://localhost:8082/updtcustom
-	@PutMapping("/updatetcustomer")
+	//https://localhost:8082/updatecustomer
+	@PutMapping("/updatecustomer")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws CustomerNotFoundException {
 		LOG.info("INSERT_CUSTOMER_CONTROLLER");
 		LOG.info("UPDATE_CUSTOMER_CONTROLLER");

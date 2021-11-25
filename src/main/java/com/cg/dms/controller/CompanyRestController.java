@@ -34,7 +34,7 @@ public class CompanyRestController {
 //        iCompanyService.insertCompany(company);
 //        return company;
 //    }
-
+	//https://localhost:8082/addcompany
 	@PostMapping("/addcompany")
 	public ResponseEntity<Company> addcompany(@RequestBody Company company) throws CompanyNotFoundException {
 		LOG.info("Controller addCompany");
@@ -45,7 +45,7 @@ public class CompanyRestController {
 		ResponseEntity<Company> response = new ResponseEntity<Company>(comp, headers, HttpStatus.OK);
 		return response;
 	}
-
+	//https://localhost:8082/getcompanybyId/{companyId}
 	@GetMapping("/getcompanybyId/{companyId}")
 	public ResponseEntity<Company> getcompanyById(@PathVariable(name = "companyId") int companyId)throws CompanyNotFoundException {
 			 
@@ -58,6 +58,7 @@ public class CompanyRestController {
 		ResponseEntity<Company> response = new ResponseEntity<Company>(company, headers, HttpStatus.OK);
 		return response;
 	}
+	//https://localhost:8082/deletecompanybyid/{companyid}
 	 @DeleteMapping("/deletecompanybyid/{companyid}")
 		public ResponseEntity<Company> deletecompanyById(@PathVariable(name = "companyrid") int companyid) throws CompanyNotFoundException {
 			LOG.info("deletecompanybyid");
@@ -68,6 +69,7 @@ public class CompanyRestController {
 			ResponseEntity<Company> response1 = new ResponseEntity<Company>(company, headers, HttpStatus.OK);
 			return response1;
 		}
+	//https://localhost:8082/updatecompany
 	 @PutMapping("/updatecompany")
 		public ResponseEntity<Company> updatecompany(@RequestBody Company company) throws CompanyNotFoundException {
 			LOG.info("Controller company");
@@ -79,13 +81,10 @@ public class CompanyRestController {
 			return response;
 		}
 
-
+	//https://localhost:8082/getallcompany
 	@GetMapping("/getallcompany")
 	public List<Company> getAllCompany() {
 		LOG.info("getAllCompany");
-		LOG.info("getAllCompany");
-		LOG.info("getAllCompany");
-
 		return iCompanyService.getAllCompany();
 	}
 }
